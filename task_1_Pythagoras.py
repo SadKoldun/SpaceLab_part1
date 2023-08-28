@@ -1,19 +1,24 @@
 # Проверка треугольника по теореме Пифагора
+from init_log import init_log
 import logging
-
-logging.basicConfig(level=logging.INFO)
 
 
 def pythagoras(length_of_sides: list):
+    for side_len in length_of_sides:
+        if side_len == 0:
+            raise Exception("Side can't be 0 or lower")
     hypotenuse = max(length_of_sides)
     length_of_sides.remove(hypotenuse)
     return length_of_sides[0] ** 2 + length_of_sides[1] ** 2 == hypotenuse ** 2
 
 
-logging.info("Start")
-print(pythagoras([5, 3, 4]))
-print(pythagoras([6, 8, 10]))
-print(pythagoras([100, 1, 65]))
+init_log()
+
+logging.info(pythagoras([5, 3, 4]))
+
+logging.info(pythagoras([6, 8, 10]))
+
+logging.info(pythagoras([100, 1, 65]))
 
 
 def test_true_1():

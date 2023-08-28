@@ -1,6 +1,16 @@
 # Растения против зомби
+import logging
+
+from init_log import init_log
+
 
 def pvz(zombies: list, plants: list):
+    for health in zombies:
+        if health < 0:
+            raise Exception("Health can't be lower than 0 (Zombies)")
+    for health in plants:
+        if health < 0:
+            raise Exception("Health can't be lower than 0 (Plants)")
     step = min(len(zombies), len(plants))
     for index in range(step):
         if zombies[index] == plants[index]:
@@ -17,10 +27,12 @@ def pvz(zombies: list, plants: list):
     return zombies_hp < plants_hp
 
 
-print(pvz([1, 3, 5, 7], [2, 4, 6, 8]))
-print(pvz([1, 3, 5, 7], [2, 4, 0, 8]))
-print(pvz([2, 1, 1, 1], [1, 2, 1, 1]))
-print(pvz([1, 3, 5, 7], [2, 4]))
+init_log()
+
+logging.info(pvz([1, 3, 5, 7], [2, 4, 6, 8]))
+logging.info(pvz([1, 3, 5, 7], [2, 4, 0, 8]))
+logging.info(pvz([2, 1, 1, 1], [1, 2, 1, 1]))
+logging.info(pvz([1, 3, 5, 7], [2, 4]))
 
 
 def test_true_1():
